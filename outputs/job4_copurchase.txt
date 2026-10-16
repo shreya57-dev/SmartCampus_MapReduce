@@ -1,0 +1,9 @@
+Biryani::Juice	38
+Biryani::Tea	10
+Chai, Cutting::Samosa	10
+Coffee::Idli	7
+Coffee::Sandwich	26
+Juice::Samosa	10
+Juice::Tea	20
+Maggi::Tea	6
+Samosa::Tea	49

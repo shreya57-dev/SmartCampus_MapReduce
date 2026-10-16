@@ -1,0 +1,4 @@
+TransactionID,Timestamp,StudentID,Item,Quantity,Amount
+T1,2026-10-05 10:00:00,S001,Tea,1,10.00
+T2,2026-10-05 10:05:00,S002,Coffee,2,30.00
+T3,2026-10-05 10:10:00,S003,Tea,1,10.00

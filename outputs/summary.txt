@@ -1,0 +1,91 @@
+SmartCampusAnalytics local simulation summary
+This file was produced by run_all.py from the CSV files in data/.
+It is a single-process MapReduce simulation, not a Hadoop cluster run.
+
+Dataset row counts (excluding the header):
+  wifi_logs.csv: 215
+  canteen.csv: 298
+  library.csv: 139
+  transport.csv: 1440
+
+Job 1 - Peak Wi-Fi usage
+  Date-hour groups: 65
+  Peak hour: 2026-10-07 13 | total data MB: 3032.740000 | total duration min: 1111.000000 | sessions: 20
+  Columns in job1_peak_wifi.txt: hour, then data_mb,duration_min,sessions
+  The PEAK line repeats the winning hour and those three totals.
+
+Job 2 - Access point utilisation
+  Access points: 5
+  Columns: access_point, then data_mb,duration_min,sessions,avg_duration_min
+  AP-CAFE-01: data MB 2213.480000, duration min 1731.000000, sessions 52, avg duration min 33.288462
+  AP-HOSTEL-A: data MB 1442.330000, duration min 1309.000000, sessions 40, avg duration min 32.725000
+  AP-LIB-01: data MB 1186.060000, duration min 1282.000000, sessions 41, avg duration min 31.268293
+  AP-LIB-02: data MB 673.010000, duration min 1152.000000, sessions 46, avg duration min 25.043478
+  AP-ADMIN-01: data MB 584.170000, duration min 980.000000, sessions 36, avg duration min 27.222222
+
+Job 3 - Canteen item frequency
+  Items: 9
+  Columns: item, then total_quantity,total_revenue
+  Biryani: quantity 47.000000, revenue 3760.000000
+  Juice: quantity 56.000000, revenue 1680.000000
+  Sandwich: quantity 37.000000, revenue 1480.000000
+  Samosa: quantity 69.000000, revenue 1380.000000
+  Tea: quantity 84.000000, revenue 840.000000
+  Coffee: quantity 42.000000, revenue 630.000000
+  Maggi: quantity 9.000000, revenue 360.000000
+  Idli: quantity 11.000000, revenue 275.000000
+  Chai, Cutting: quantity 14.000000, revenue 112.000000
+
+Job 4 - Top co-purchased items
+  Distinct unordered pairs: 9
+  Columns: item_a::item_b, then distinct transaction count
+  Ranking below is by count. The job file itself is sorted by pair name.
+  Samosa::Tea: 49 transactions
+  Biryani::Juice: 38 transactions
+  Coffee::Sandwich: 26 transactions
+  Juice::Tea: 20 transactions
+  Biryani::Tea: 10 transactions
+  Chai, Cutting::Samosa: 10 transactions
+  Juice::Samosa: 10 transactions
+  Coffee::Idli: 7 transactions
+  Maggi::Tea: 6 transactions
+
+Job 5 - Library usage anomaly
+  Students with at least one valid EXIT visit: 23
+  Overall: total duration min 3870.000000, visits 69, average visit min 56.086957
+  Threshold: student average > 1.5 x 56.086957
+  Anomalous students: 3
+  Anomaly columns: student, then total_duration,visit_count,student_average,overall_average,threshold
+  S901: 495.000000,3,165.000000,56.086957,84.130435
+  S902: 555.000000,3,185.000000,56.086957,84.130435
+  S903: 615.000000,3,205.000000,56.086957,84.130435
+  S021 has only an ENTRY row and does not appear, because ENTRY is not a visit.
+
+Job 6 - Transport congestion
+  Route-hour groups: 180
+  Congested (average speed < 20 km/h): 15
+  Normal: 165
+  Columns: RouteID|YYYY-MM-DD HH, then average_speed,readings,STATUS
+  R3 12:00 groups (planted at exactly 20 km/h): 5
+  R3|2026-10-05 12: 20.000000,8,NORMAL
+  R3|2026-10-06 12: 20.000000,8,NORMAL
+  R3|2026-10-07 12: 20.000000,8,NORMAL
+  R3|2026-10-08 12: 20.000000,8,NORMAL
+  R3|2026-10-09 12: 20.000000,8,NORMAL
+  Sample congested groups:
+  R1|2026-10-05 08: 14.481250,8,CONGESTED
+  R1|2026-10-05 09: 14.802500,8,CONGESTED
+  R1|2026-10-06 08: 14.308750,8,CONGESTED
+  R1|2026-10-06 09: 14.556250,8,CONGESTED
+  R1|2026-10-07 08: 14.066250,8,CONGESTED
+  R1|2026-10-07 09: 14.058750,8,CONGESTED
+
+Output files:
+  outputs/job1_peak_wifi.txt (2409 bytes)
+  outputs/job2_access_points.txt (237 bytes)
+  outputs/job3_canteen_items.txt (258 bytes)
+  outputs/job4_copurchase.txt (153 bytes)
+  outputs/job5_student_totals.txt (647 bytes)
+  outputs/job5_global_average.txt (32 bytes)
+  outputs/job5_anomalies.txt (147 bytes)
+  outputs/job6_congestion.txt (6525 bytes)
